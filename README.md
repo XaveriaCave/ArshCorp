@@ -1,5 +1,8 @@
-**Prerequisites:**  Node.js
+## Pacific Mind Team
+presents
+# Arsh Corporation Game
 
+**Prerequisites:**  Node.js
 
 1. Install dependencies:
    `npm install`
