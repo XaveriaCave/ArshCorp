@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with game stats and cosmetic information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique user ID" },
+        "displayName": { "type": "string", "description": "Display name of the user" },
+        "email": { "type": "string", "description": "Email address of the user" },
+        "profession": { "type": "string", "description": "Cosmetic profession choice" },
+        "gender": { "type": "string", "description": "Cosmetic gender selection" },
+        "status": { "type": "string", "description": "Cosmetic marital status selection" },
+        "assets": { "type": "string", "description": "Cosmetic real assets explanation" },
+        "elo": { "type": "integer", "description": "Mogul rating score" },
+        "gamesPlayed": { "type": "integer", "description": "Total games played" },
+        "wins": { "type": "integer", "description": "Total wins" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Record creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Record last update timestamp" }
+      },
+      "required": ["uid", "displayName", "email", "createdAt", "updatedAt"]
+    },
+    "GameSave": {
+      "title": "GameSave",
+      "description": "Saved game states that sync with Firestore for resume capability.",
+      "type": "object",
+      "properties": {
+        "saveId": { "type": "string", "description": "The unique ID of the save slot" },
+        "userId": { "type": "string", "description": "The user who owns this save" },
+        "name": { "type": "string", "description": "Name of the save block, e.g. 'Epic Empire'" },
+        "turn": { "type": "integer", "description": "Current turn offset" },
+        "players": { "type": "array", "description": "Serialized list of players in the game" },
+        "currentPlayerIdx": { "type": "integer", "description": "Current active player index" },
+        "tiles": { "type": "array", "description": "Serialized list of board tiles state" },
+        "randomEventQueue": { "type": "array", "description": "Chronological events indices" },
+        "jailFreeCards": { "type": "object", "description": "Jail free cards ownership map" },
+        "arenaLog": { "type": "array", "description": "Feed records shown in the right dashboard" },
+        "lastInterrupted": { "type": "object", "description": "Details of the interrupted interaction for resume lock" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Record creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Record last update timestamp" }
+      },
+      "required": ["saveId", "userId", "name", "turn", "players", "currentPlayerIdx", "tiles", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles indexed by uid"
+    },
+    "users/{userId}/saves/{saveId}": {
+      "schema": "GameSave",
+      "description": "Saved game slots owned by specific users"
+    }
+  }
+}

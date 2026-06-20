@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ── MODAL DIALOG OVERLAYS STYLE ENGINE ── */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(2, 6, 12, 0.88);
+  background-image: radial-gradient(circle at center, rgba(16, 24, 48, 0.45) 0%, rgba(2, 6, 12, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Base modal container centered on screen */
+.modal-box {
+  width: 100%;
+  max-width: 450px;
+  background-color: rgba(8, 13, 22, 0.98) !important;
+  border: 1px solid rgba(0, 212, 255, 0.45) !important;
+  box-shadow: 0 0 35px rgba(0, 212, 255, 0.2), inset 0 0 15px rgba(0, 212, 255, 0.05);
+  border-radius: 12px;
+  position: relative;
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.modal-overlay.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Individual Modal Width Customisations */
+.auction-box {
+  max-width: 480px;
+}
+
+.mortgage-box {
+  max-width: 500px;
+}
+
+.event-modal {
+  max-width: 400px;
+}
+
+/* Player Status inspector panel styles */
+.ps-box {
+  width: 100%;
+  max-width: 480px;
+  background-color: rgba(8, 13, 22, 0.98) !important;
+  border: 1px solid rgba(0, 212, 255, 0.45) !important;
+  box-shadow: 0 0 35px rgba(0, 212, 255, 0.2), inset 0 0 15px rgba(0, 212, 255, 0.05);
+  border-radius: 12px;
+  position: relative;
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.open .ps-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Cyberpunk corner bracket element */
+.bracket::before, .bracket::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: #00d4ff;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.bracket::before {
+  top: 6px;
+  left: 6px;
+  border-width: 1px 0 0 1px;
+}
+
+.bracket::after {
+  bottom: 6px;
+  right: 6px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── GAME TOAST NOTIFICATIONS STYLE ENGINE ── */
+.game-toast {
+  position: relative;
+  background-color: rgba(8, 14, 24, 0.96);
+  border-left: 4px solid #00d4ff;
+  border-top: 1px solid rgba(0, 212, 255, 0.15);
+  border-right: 1px solid rgba(0, 212, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  color: #ffffff;
+  padding: 12px 28px 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 212, 255, 0.1);
+  transform: translateX(130%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.toast-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  font-family: monospace;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+.toast-close:hover {
+  color: #ffffff;
+  transform: scale(1.15);
+}
+
+.game-toast.toast-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.game-toast.toast-hide {
+  transform: translateX(130%);
+  opacity: 0;
+}
+
+.game-toast.toast-good {
+  border-left-color: #00ff88;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 255, 136, 0.1);
+  border-top-color: rgba(0, 255, 136, 0.08);
+}
+
+.game-toast.toast-bad {
+  border-left-color: #ff3366;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 51, 102, 0.1);
+  border-top-color: rgba(255, 51, 102, 0.08);
+}
+
+.game-toast.toast-event {
+  border-left-color: #ffb700;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 183, 0, 0.1);
+  border-top-color: rgba(255, 183, 0, 0.08);
+}
+
+.toast-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.toast-body {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: rgba(210, 225, 240, 0.85);
+  line-height: 1.45;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "ArshCorp",
+  "description": "A cyberpunk corporate board game where players manage portfolios, take bank loans, mortgage assets, trade with AI and other players, and build their digital empires.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
